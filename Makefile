@@ -13,7 +13,7 @@ FUNCTION_NAME ?= rotel-test-nodejs
 ZIP_CODE ?= 90210
 
 OT_NODEJS_LAYER=arn:aws:lambda:${AWS_DEFAULT_REGION}:184161586896:layer:opentelemetry-nodejs-0_13_0:1
-ROTEL_LAYER=arn:aws:lambda:${AWS_DEFAULT_REGION}:418653438961:layer:rotel-extension-amd64-alpha:21
+ROTEL_LAYER=arn:aws:lambda:${AWS_DEFAULT_REGION}:418653438961:layer:rotel-extension-amd64-alpha:22
 
 bundle: index.js rotel-honeycomb.env
 	rm -f function.zip && zip function.zip index.js rotel-honeycomb.env
