@@ -29,6 +29,11 @@ Required environment variables:
 * `HONEYCOMB_API_KEY`: API key for environment
 * AWS CLI credentials: Credentials required for executing the CLI and creating a function
 
+The following additional environment variables are automatically included:
+* `OTEL_NODE_ENABLED_INSTRUMENTATIONS="http,aws-lambda,aws-sdk"`: control which instrumentations to enable
+* `OTEL_PROPAGATORS="tracecontext,baggage,xray-lambda"`: makes sure that trace IDs can propagate from AWS to OTEL (particularly useful when exporting to AWS X-Ray)
+* `OTEL_SEMCONV_STABILITY_OPT_IN="http"`: enables the latest semantic conventions
+
 ```shell
 make deploy
 ```

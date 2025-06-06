@@ -12,7 +12,7 @@ FUNCTION_NAME ?= rotel-test-nodejs
 
 ZIP_CODE ?= 90210
 
-OT_NODEJS_LAYER=arn:aws:lambda:${AWS_DEFAULT_REGION}:184161586896:layer:opentelemetry-nodejs-0_13_0:1
+OT_NODEJS_LAYER=arn:aws:lambda:${AWS_DEFAULT_REGION}:184161586896:layer:opentelemetry-nodejs-0_14_0:1
 ROTEL_LAYER=arn:aws:lambda:${AWS_DEFAULT_REGION}:418653438961:layer:rotel-extension-amd64-alpha:24
 
 bundle: index.js rotel-honeycomb.env
@@ -27,7 +27,7 @@ deploy: bundle
         --zip-file fileb://function.zip \
         --runtime nodejs22.x \
         --handler index.handler \
-        --environment 'Variables={AWS_LAMBDA_EXEC_WRAPPER=/opt/otel-handler,ROTEL_ENV_FILE=/var/task/rotel-honeycomb.env,OTEL_NODE_ENABLED_INSTRUMENTATIONS="http,aws-lambda,aws-sdk",OTEL_PROPAGATORS="tracecontext,baggage,xray-lambda",HONEYCOMB_API_KEY='"${HONEYCOMB_API_KEY}"'}' \
+        --environment 'Variables={AWS_LAMBDA_EXEC_WRAPPER=/opt/otel-handler,ROTEL_ENV_FILE=/var/task/rotel-honeycomb.env,OTEL_NODE_ENABLED_INSTRUMENTATIONS="http,aws-lambda,aws-sdk",OTEL_PROPAGATORS="tracecontext,baggage,xray-lambda",OTEL_SEMCONV_STABILITY_OPT_IN="http",HONEYCOMB_API_KEY='"${HONEYCOMB_API_KEY}"'}' \
         --timeout 10 \
         --memory 512 \
         --tracing-config 'Mode=Active' \
